@@ -88,30 +88,38 @@ st.markdown(
         .sidebar .stButton>button, .stButton>button {
             border-radius: 999px !important;
         }
+        /* ---------- TABS: equal width, centered text ---------- */
         .stTabs [data-baseweb="tab-list"] {
-            gap: 4px;
-            border-bottom: 1px solid rgba(148,163,184,0.2);
+            display: flex !important;
+            gap: 10px;
+            border-bottom: 4px solid rgba(148,163,184,0.2);
         }
         .stTabs [data-baseweb="tab"] {
+            flex: 1 !important;                     /* all tabs same width */
             padding-top: 6px;
             padding-bottom: 6px;
             border-radius: 999px;
             background-color: rgba(15,23,42,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .stTabs [aria-selected="true"] {
+        .stTabs [data-baseweb="tab"] p {
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;                /* if text is too long */
+        }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] {
             background: linear-gradient(120deg, #4f46e5, #38bdf8) !important;
             color: white !important;
         }
-        /* Chat bubbles */
-        .chat-user {
-            background: linear-gradient(120deg,#2563eb,#1d4ed8);
-            color: #f9fafb;
-            padding: 9px 13px;
-            border-radius: 18px;
-            margin: 6px 0;
-            max-width: 78%;
-            margin-left: auto;
-            font-size: 14px;
+        .stTabs [data-baseweb="tab"][aria-selected="true"] p {
+            color: #ffffff !important;
         }
         .chat-bot {
             background: #020617;
@@ -484,7 +492,7 @@ with tabs[2]:
         )
     with chat_cols[1]:
         resp_lang = st.selectbox(
-            "Reply language", ["auto", "en", "hi", "ta", "te", "kn"], index=0
+            "Reply language", ["en", "hi", "ta", "te", "kn"], index=0
         )
 
     send_clicked = st.button("Send", key="chat_send")
